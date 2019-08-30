@@ -3,50 +3,60 @@ from collections import OrderedDict
 
 dictList = []
 
+
+
 def importAndCleanData():
-    
-    itemCount = 0
-    
-    with open('data/vg_sales_original.csv', newline='', encoding="utf8") as csvfile:
-        
+    descriptionDict = {}
+    mediaDict = {}
+
+    # Put the descriptions into a dictionary for merging
+    with open('data/original_data/steam_description_data.csv', newline='', encoding="utf8") as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            descriptionDict[row["steam_appid"]] = row["short_description"]
+
+    # Put the game images into a dictionary for merging
+    with open('data/original_data/steam_media_data.csv', newline='', encoding="utf8") as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            mediaDict[row["steam_appid"]] = row["header_image"]
+            
+    with open('data/original_data/steam.csv', newline='', encoding="utf8") as csvfile:
+
+        itemCount = 0
         reader = csv.DictReader(csvfile)
         
         for row in reader:
             oDict = OrderedDict()
-            score = 0
             
-            # Only keep rows with either a user and/or critic score present
-            if (row["User_Score"] != "" or row["Critic_Score"] != "") and row["Year"] != "":
+            # Only keep rows with games that have English language
+            if row["english"] == "1" and int(row["average_playtime"]) > 0 and int(row["positive_ratings"]) > 0:
 
                 itemCount+=1
                 
                 # Populate the custom ordered dict for the rows and cols being kept
-                oDict["GameID"] = str(itemCount)
-                oDict["Name"] = row["Name"].lower()
-                oDict["Genre"] = row["Genre"].lower()
-                oDict["ESRB"] = row["ESRB_Rating"].lower()
-                oDict["Platform"] = row["Platform"].lower()
-                oDict["Publisher"] = row["Publisher"].lower()
-                oDict["Developer"] = row["Developer"].lower()
+                oDict["GameID"] = row["appid"]
+                oDict["Name"] = row["name"].lower()
+                oDict["Year"] = row["release_date"][:4]
+                oDict["Developer"] = row["developer"].lower()
+                oDict["Publisher"] = row["publisher"].lower()
+                oDict["Platform"] = row["platforms"].lower()
+                oDict["Genre"] = row["genres"].lower()
+                oDict["Tags"] = row["steamspy_tags"].lower()
+                oDict["PositiveRatings"] = row["positive_ratings"]
+                oDict["NegativeRatings"] = row["negative_ratings"]
+                oDict["AveragePlaytime"] = row["average_playtime"]
+                oDict["Price"] = row["price"]
 
-                # Score rating will be average of user and critic score
-                # if both are present, otherwise will be whichever one
-                # is present
-                if row["User_Score"] == "":
-                    score = row["Critic_Score"]
-                elif row["Critic_Score"] == "":
-                    score = row["User_Score"]
-                else:
-                    score = (float(row["Critic_Score"]) + float(row["User_Score"])) / 2
-
-                oDict["Score"] = str(score)
-
-                oDict["Year"] = row["Year"][:4]
+                # Merge the description and image from their respective dictionaries
+                oDict["Description"] = descriptionDict[row["appid"]]
+                oDict["Image"] = mediaDict[row["appid"]]
+                
                 
                 if len(oDict["Year"]) != 4:
-                    raise ValueError('ERROR: Year on line ' + str(row["Rank"]) + " is not four digits.")
-            
-                oDict["URL"] = row["img_url"]
+                    raise ValueError('ERROR: Year on appID ' + str(row["appid"]) + " is not four digits.")
 
                 #Add the cleaned row to the list of Ordered Dictionaries
                 dictList.append(oDict)
@@ -55,8 +65,8 @@ def importAndCleanData():
         print("Cleaned data set contains " + str(itemCount) + " items.")
 
 def writeCleanedDataToCSV():
-    with open('data/games.csv', 'w', newline='', encoding="utf8") as csvfile:
-        fieldnames = ['GameID', 'Name', 'Genre', 'ESRB', 'Platform', 'Publisher', 'Developer', 'Score', 'Year', 'URL']
+    with open('data/games_clean.csv', 'w', newline='', encoding="utf8") as csvfile:
+        fieldnames = ['GameID', 'Name', 'Year', 'Developer', 'Publisher', 'Platform', 'Genre', 'Tags', 'PositiveRatings', 'NegativeRatings', 'AveragePlaytime', 'Price', 'Description', 'Image']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         
