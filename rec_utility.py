@@ -1,11 +1,12 @@
 
 import data_cleaning as clean
-import contentRecommender as cRecommender
+import content_recommender as cRecommender
 
 
 #cRecommender.printData()
 
 entry = ""
+matrix = []
 
 while entry.lower() != "exit":
      print("Select an action: ")
@@ -16,6 +17,7 @@ while entry.lower() != "exit":
      print("5. Write similarity matrix to file")
      print("6. Read in similarity matrix from file")
      print("7. Get top 10 recommendations by ID")
+     print("8. Write top 10 recommendations to CSV")
      
      entry = input()
 
@@ -30,14 +32,16 @@ while entry.lower() != "exit":
           cRecommender.populateSimilarityMatrix()
      elif(entry == "4"):
           num = input("Enter First ID: ")
-          id1 = int(num) - 1
+          id1 = int(num)
           num = input("Enter Second ID: ")
-          id2 = int(num) - 1
+          id2 = int(num)
           print(cRecommender.getSimilarity(id1,id2))
      elif(entry == "5"):
           cRecommender.writeSimilarityMatrixToCSV()
      elif(entry=="6"):
-          cRecommender.readSimilarityMatrixFromCSV()
+          matrix = cRecommender.readSimilarityMatrixFromCSV()
      elif(entry=="7"):
           num = input("Enter item ID: ")
-          cRecommender.getTopTenRecommendations(int(num)-1)
+          cRecommender.getTopTenRecommendations(int(num), matrix)
+     elif(entry=="8"):
+          cRecommender.writeTopTenRecsToCSV(matrix)

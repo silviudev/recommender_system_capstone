@@ -33,13 +33,11 @@ def importAndCleanData():
             
             # Only keep rows with games that have English language
             if row["english"] == "1" and int(row["average_playtime"]) > 0 and int(row["positive_ratings"]) > 0:
-
-                itemCount+=1
                 
                 # Populate the custom ordered dict for the rows and cols being kept
-                oDict["GameID"] = row["appid"]
+                oDict["GameID"] = itemCount
                 oDict["Name"] = row["name"].lower()
-                oDict["Year"] = row["release_date"][:4]
+                oDict["ReleaseDate"] = row["release_date"]
                 oDict["Developer"] = row["developer"].lower()
                 oDict["Publisher"] = row["publisher"].lower()
                 oDict["Platform"] = row["platforms"].lower()
@@ -53,20 +51,18 @@ def importAndCleanData():
                 # Merge the description and image from their respective dictionaries
                 oDict["Description"] = descriptionDict[row["appid"]]
                 oDict["Image"] = mediaDict[row["appid"]]
-                
-                
-                if len(oDict["Year"]) != 4:
-                    raise ValueError('ERROR: Year on appID ' + str(row["appid"]) + " is not four digits.")
 
                 #Add the cleaned row to the list of Ordered Dictionaries
                 dictList.append(oDict)
+
+                itemCount+=1
           
 
         print("Cleaned data set contains " + str(itemCount) + " items.")
 
 def writeCleanedDataToCSV():
     with open('data/games_clean.csv', 'w', newline='', encoding="utf8") as csvfile:
-        fieldnames = ['GameID', 'Name', 'Year', 'Developer', 'Publisher', 'Platform', 'Genre', 'Tags', 'PositiveRatings', 'NegativeRatings', 'AveragePlaytime', 'Price', 'Description', 'Image']
+        fieldnames = ['GameID', 'Name', 'ReleaseDate', 'Developer', 'Publisher', 'Platform', 'Genre', 'Tags', 'PositiveRatings', 'NegativeRatings', 'AveragePlaytime', 'Price', 'Description', 'Image']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         
