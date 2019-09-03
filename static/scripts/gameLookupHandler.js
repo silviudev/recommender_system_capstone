@@ -5,7 +5,9 @@ $(function() {
           success: function(data) {
             console.log("AJAX WORKED!");
             console.log(data);
-            $("#topTenRecs").html(JSON.stringify(data,null," "));
+            $("#gameName").html(data["mainData"]["0"]["1"]);
+            $("#gameImage").attr("src", data["mainData"]["0"]["13"]);
+            $("#gameDescription").html(data["mainData"]["0"]["12"]);
           }
       });
     });

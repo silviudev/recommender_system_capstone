@@ -4,11 +4,9 @@ import csv
 #Create the Games db and games table if they don't exist and populate the
 #database.
 def populateDatabase():
-    db_string = 'data/database/Games.db'
-
     try:
-        db_conn = sqlite3.connect(db_string)
-        db_conn.execute("DROP TABLE games")
+        db_conn = sqlite3.connect(":memory:", check_same_thread=False)
+        db_conn.isolation_level = None
         db_conn.execute("CREATE TABLE games(GameID INTEGER PRIMARY KEY, \
         Name VARCHAR(200), ReleaseDate VARCHAR(100), Developer VARCHAR(100), \
         Publisher VARCHAR(100), Platform VARCHAR(100), Genre VARCHAR(100), \
@@ -29,6 +27,7 @@ def populateDatabase():
     except sqlite3.OperationalError:
         print("Database error- try restarting the server")
 
+    print("Example of game with id 123 from database: ")
     print(db_conn.execute("SELECT * from games WHERE GameID=123").fetchall())
     print("Games database is ready")
-    db_conn.close()
+    return db_conn
