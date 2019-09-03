@@ -23,7 +23,7 @@ def getRecs():
 
     # Fetch the top ten recommendations' info from the database
     top_ten_ids = topTenDict[id]
-    top_ten_list = db_conn.execute("SELECT Name, Price, Image, PositiveRatings, \
+    top_ten_list = db_conn.execute("SELECT GameId, Name, Price, Image, PositiveRatings, \
     NegativeRatings FROM games WHERE GameId=? OR GameId=? OR GameId=? OR GameId=? OR GameId=? \
     OR GameId=? OR GameId=? OR GameId=? OR GameId=? OR GameId=?", tuple(top_ten_ids)).fetchall()
 
@@ -31,7 +31,7 @@ def getRecs():
     # Get all the info for the main game on the page
     main_data = db_conn.execute("SELECT * FROM games WHERE GameID=?", (id,)).fetchall()
 
-    # Printing for debug purposes
+    # Printing data for debug purposes
     #print(top_ten_list)
     #print(main_data)
 
