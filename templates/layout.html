@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{url_for('static', filename='styles/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='styles/recommender.css')}}">
   <title>Recommender App</title>
-  <script src="{{url_for('static', filename='scripts/jquery.js')}}"></script>
-  <script src="{{url_for('static', filename='scripts/gameLookupHandler.js')}}" defer></script>
 </head>
 <body>
   <div id="root">{% block content %}{% endblock %}</div>
+  <script src="{{url_for('static', filename='scripts/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='scripts/gameLookupHandler.js')}}"></script>
 </body>
 </html>

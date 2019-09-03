@@ -8,10 +8,10 @@ $(function() {
 
       for(let i = 0; i < data["recData"].length; i++){
         let queryString = "#rec" + (i+1)
-        $(queryString + " p").text(data["recData"][i][1])
-        $(queryString + " figcaption").text(data["recData"][i][2])
+        $(queryString + " figcaption").text("$" + data["recData"][i][2])
         $(queryString + " img").attr("src", data["recData"][i][3])
         $(queryString + " img").attr("alt", "Image for the recommended game " + data["recData"][i][1])
+        $(queryString + " p").text(data["recData"][i][1])
         $("#rec_link" + (i+1)).attr("href", "/api/recs?id=" + data["recData"][i][0])
       }
     }

@@ -1,24 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
    <input type="number" id="game_id">
-   <button type="button" name="button" id="get_recs"> Get Recommendations</button>
-   <main id="main_game">
+   <button type="button" name="button" id="get_recs" class="btn btn-primary"> Get Recommendations</button>
+   <main id="main_game" class="container">
      <header id="gameName"></header>
      <figure id="gameImageFigure"><img src="" alt="Image of the main game" id="gameImage"></figure>
      <article id="gameDescription"></article>
 
    </main>
-   <section id="topTenRecs">
+   <section id="topTenRecs" class="container">
      <h1>You may also like these games...</h1>
-     <a href="" class="recs_link" id="rec_link1"><figure class="recs" id="rec1"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link2"><figure class="recs" id="rec2"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link3"><figure class="recs" id="rec3"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link4"><figure class="recs" id="rec4"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link5"><figure class="recs" id="rec5"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link6"><figure class="recs" id="rec6"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link7"><figure class="recs" id="rec7"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link8"><figure class="recs" id="rec8"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link9"><figure class="recs" id="rec9"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
-     <a href="" class="recs_link" id="rec_link10"><figure class="recs" id="rec10"><p></p><img src="" alt=""><figcaption></figcaption></figure></a>
+     <div class="row">
+      <a href="" class="recs_link col-sm card" id="rec_link1"><figure class="recs" id="rec1"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link2"><figure class="recs" id="rec2"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link3"><figure class="recs" id="rec3"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link4"><figure class="recs" id="rec4"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link5"><figure class="recs" id="rec5"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+     </div>
+
+     <div class="row">
+      <a href="" class="recs_link col-sm card" id="rec_link6"><figure class="recs" id="rec6"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link7"><figure class="recs" id="rec7"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link8"><figure class="recs" id="rec8"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link9"><figure class="recs" id="rec9"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+      <a href="" class="recs_link col-sm card" id="rec_link10"><figure class="recs" id="rec10"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
+     </div>
    </section>
 {% endblock content%}
