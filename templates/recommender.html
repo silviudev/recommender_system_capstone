@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <ul>
-      {% for rec in recs %}
-        <li>{{rec}}</li>
-      {% endfor %}
-    </ul>
+   <input type="number" id="game_id">
+   <button type="button" name="button" id="get_recs"> Get Recommendations</button>
+   <main id="main_game">
+   </main>
+   <aside id="topTenRecs">
+   </aside>
 {% endblock content%}
