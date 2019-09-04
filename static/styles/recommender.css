@@ -1,3 +1,7 @@
+.card h3{
+  text-decoration: underline;
+}
+
 .recs_link{
   margin: 1%;
 
@@ -8,6 +12,18 @@
   text-decoration: none;
 }
 
+.mainCol{
+  font-size: 1.5em;
+}
+
+.infoCol *{
+  margin-top: 6%;
+}
+
+#gameImage{
+  border: 1px solid black
+}
+
 #topTenRecs{
   border: 2px solid black;
   margin-bottom: 5%;
@@ -15,6 +31,10 @@
 }
 
 #gameName{
-  font-size: 2em;
+  font-size: 2.2em;
   font-weight: bold;
+}
+
+#cartButton{
+  margin-top: 2%;
 }
