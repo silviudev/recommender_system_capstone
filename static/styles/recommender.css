@@ -1,0 +1,20 @@
+.recs_link{
+  margin: 1%;
+
+}
+
+.recs_link figure img{
+  margin-top:3%;
+  text-decoration: none;
+}
+
+#topTenRecs{
+  border: 2px solid black;
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+
+#gameName{
+  font-size: 2em;
+  font-weight: bold;
+}
