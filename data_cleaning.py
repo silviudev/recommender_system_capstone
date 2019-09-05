@@ -51,6 +51,7 @@ def importAndCleanData():
                 # Merge the description and image from their respective dictionaries
                 oDict["Description"] = descriptionDict[row["appid"]]
                 oDict["Image"] = mediaDict[row["appid"]]
+                oDict["PercentageRating"] = int(row["positive_ratings"]) / (int(row["positive_ratings"]) + int(row["negative_ratings"]))
 
                 #Add the cleaned row to the list of Ordered Dictionaries
                 dictList.append(oDict)
@@ -62,7 +63,7 @@ def importAndCleanData():
 
 def writeCleanedDataToCSV():
     with open('data/games_clean.csv', 'w', newline='', encoding="utf8") as csvfile:
-        fieldnames = ['GameID', 'Name', 'ReleaseDate', 'Developer', 'Publisher', 'Platform', 'Genre', 'Tags', 'PositiveRatings', 'NegativeRatings', 'AveragePlaytime', 'Price', 'Description', 'Image']
+        fieldnames = ['GameID', 'Name', 'ReleaseDate', 'Developer', 'Publisher', 'Platform', 'Genre', 'Tags', 'PositiveRatings', 'NegativeRatings', 'AveragePlaytime', 'Price', 'Description', 'Image', 'PercentageRating']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         
