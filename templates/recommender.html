@@ -1,13 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-   <input type="number" id="game_id">
-   <button type="button" name="button" id="get_recs" class="btn btn-primary"> Get Recommendations</button>
    <main id="main_game" class="container text-center">
      <div class="row">
        <div class="col-md card mainCol border-dark">
          <header id="gameName"></header>
          <figure id="gameImageFigure" ><img class="card-img-top" src="" alt="Image of the main game" id="gameImage"></figure>
-         <figcaption id="gameID"></figcaption>
+         <figcaption id="gameID">{{id}}</figcaption>
          <h3>About the game</h3>
          <article id="gameDescription"></article>
        </div>
@@ -44,4 +42,5 @@
       <a href="" class="recs_link col-md card text-center border-dark text-dark" id="rec_link10"><figure class="recs" id="rec10"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
      </div>
    </section>
+  <script src="{{url_for('static', filename='scripts/gameLookupHandler.js')}}" defer></script>
 {% endblock content%}

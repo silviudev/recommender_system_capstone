@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-    <main>
-      <a href="/recommender">Recommender System</a>
-    </main>
+<main class="container text-center">
+  <h1>Top 10 most popular games</h1>
+    {% for tup in topTen %}
+      <a href="/recommender?id={{tup[0]}}" class="col-md card text-center border-dark text-dark" id="rec_link1">
+        <figure class="recs" id="rec1">
+          <img src="{{tup[3]}}" alt="" class="card-img-top">
+          <p class="card-title">{{tup[1]}}</p>
+          <figcaption></figcaption>
+        </figure>
+      </a>
+    {% endfor %}
+</main>
 {% endblock content%}

@@ -20,6 +20,11 @@
   margin-top: 6%;
 }
 
+#main_game{
+  margin-top: 5%;
+  padding-bottom: 3%;
+}
+
 #gameImage{
   border: 1px solid black
 }

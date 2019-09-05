@@ -1,5 +1,4 @@
 $(function() {
-    $(document).ready(getRecs())
     function updatePage(data){
       console.log("AJAX WORKED!");
       console.log(data);
@@ -28,7 +27,7 @@ $(function() {
     }
     function getRecs(){
       $.ajax({
-          url: '/api/recs?id=' + document.getElementById("gameID").innerText,
+          url: '/api/recs?id=' + document.getElementById("game_id").value,
           success: updatePage
       });
     }

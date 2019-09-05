@@ -10,11 +10,18 @@ db_conn = ""
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    # Get the top 10 games by most positive ratings
+    top_ten_games = db_conn.execute("SELECT GameId, Name, Price, Image, PositiveRatings, \
+    NegativeRatings, Genre FROM games ORDER BY PositiveRatings DESC LIMIT 10").fetchall()
+    return render_template("home.html", topTen=top_ten_games)
 
 @app.route("/recommender")
 def recommender():
-    return render_template("recommender.html")
+    return render_template("recommender.html", id=request.args.get("id"))
+
+@app.route("/analytics")
+def analytics():
+    return render_template("analytics.html")
 
 @app.route("/api/recs")
 def getRecs():
