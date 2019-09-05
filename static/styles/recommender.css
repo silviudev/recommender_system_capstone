@@ -43,3 +43,7 @@
 #cartButton{
   margin-top: 2%;
 }
+
+.hidden{
+  display: none;
+}
