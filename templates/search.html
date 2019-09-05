@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="search_container text-center">
+  <h1>{{num}} Search Results for '{{terms}}'</h1>
+    {% for tup in results %}
+      <a href="/recommender?id={{tup[0]}}" class="text-dark">
+        <figure>
+          <img src="{{tup[3]}}" alt="game image" class="search_image" >
+          <figcaption>{{tup[1]}}</figcaption>
+          <figcaption>{{tup[2]}}</figcaption>
+        </figure>
+      </a>
+    {% endfor %}
+</main>
+{% endblock content%}

@@ -1,3 +1,12 @@
+.home_figure img{
+  width: 100%;
+  margin-top: 5%;
+}
+
+.home_containter{
+  width: 55%;
+}
+
 .card-title{
   font-size: 1.5em;
 }

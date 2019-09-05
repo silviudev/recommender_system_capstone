@@ -23,6 +23,15 @@ def recommender():
 def analytics():
     return render_template("analytics.html")
 
+@app.route("/search")
+def search():
+    search_terms = request.args.get("data")
+
+    #Get the games where the name matches the search term, up to 100
+    search_results =  db_conn.execute("SELECT GameId, Name, Price, Image, \
+    Genre FROM games WHERE Name LIKE ? LIMIT 100", ("%" + search_terms + "%",)).fetchall()
+    return render_template("search.html", results=search_results, terms=search_terms, num=len(search_results))
+
 @app.route("/api/recs")
 def getRecs():
     #Get the id of the game from the request parameters

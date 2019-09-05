@@ -1,0 +1,13 @@
+.search_image{
+  height: 60%;
+  width:60%;
+}
+
+.search_container{
+  width: 30%;
+  margin: 2% auto;
+}
+
+a{
+  text-decoration: none;
+}
