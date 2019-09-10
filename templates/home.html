@@ -2,13 +2,23 @@
 {% block content %}
 <main class="container text-center home_containter">
   <h1>Top 10 most popular games</h1>
-    {% for tup in topTen %}
-      <a href="/recommender?id={{tup[0]}}" class="col-md card text-center border-dark text-dark" id="rec_link1">
-        <figure class="home_figure">
-          <img src="{{tup[3]}}" alt="" class="card-img-top">
-          <p class="card-title">{{tup[1]}}</p>
-        </figure>
-      </a>
-    {% endfor %}
+      {% for i in range(0,10,2) %}
+      <div class="row">
+        <a href="/recommender?id={{topTen[i][0]}}" class="col-md card text-center border-dark text-dark">
+          <figure class="home_figure">
+            <img src="{{topTen[i][3]}}" alt="" class="card-img-top">
+            <p class="card-title">{{topTen[i][1]}}</p>
+          </figure>
+        </a>
+
+        <a href="/recommender?id={{topTen[i+1][0]}}" class="col-md card text-center border-dark text-dark">
+          <figure class="home_figure">
+            <img src="{{topTen[i+1][3]}}" alt="" class="card-img-top">
+            <p class="card-title">{{topTen[i+1][1]}}</p>
+          </figure>
+        </a>
+      </div>
+      {% endfor %}
+
 </main>
 {% endblock content%}

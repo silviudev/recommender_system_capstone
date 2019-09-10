@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="container">
+    <form class="" action="{{url_for('login')}}" method="post">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+        <div class="form-group">
+          {{form.username.label(class="form-control-label")}}
+          {{form.username(class="form-control form-control-lg")}}
+        </div>
+        <div class="form-group">
+          {{form.password.label(class="form-control-label")}}
+          {{form.password(class="form-control form-control-lg")}}
+        </div>
+        <div class="form-check">
+          {{form.remember(class="form-check-input")}}
+          {{form.remember.label(class="form-check-label")}}
+        </div>
+      </fieldset>
+      <div class="form-group">
+        {{form.submit(class="btn btn-outline-info")}}
+      </div>
+      <small class="text-muted"><a href="#">Forgot Password?</a></small>
+    </form>
+  </div>
+  <div class="border-top pt-3">
+    <small class="text-muted">Don't have an account yet? <a href="{{url_for('register')}}">Register here</a></small>
+  </div>
+{% endblock content%}

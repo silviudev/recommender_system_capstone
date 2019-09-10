@@ -1,9 +1,11 @@
-from flask import Flask, render_template, url_for, jsonify, request
+from flask import Flask, render_template, url_for, jsonify, request, flash, redirect
 from content_recommender import importTopTenFromCSV
 from db_utility import populateDatabase
+from forms import RegistrationForm, LoginForm
 import sqlite3
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '6649d7dbabb36bf6b6e02f23088b6571'
 topTenDict = importTopTenFromCSV()
 db_conn = ""
 
@@ -14,6 +16,34 @@ def home():
     top_ten_games = db_conn.execute("SELECT GameId, Name, Price, Image, PositiveRatings, \
     NegativeRatings, Genre FROM games ORDER BY PositiveRatings DESC LIMIT 10").fetchall()
     return render_template("home.html", topTen=top_ten_games)
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    elif request.method == 'POST' and form.errors:
+        for error in form.errors:
+            for str in form.errors[error]:
+                flash(f"{error.capitalize()} error, {str}", 'danger')
+    return render_template("register.html", form=form)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.username.data == "Manager" and form.password.data == '123':
+            flash(f'Login successful for user {form.username.data}!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash("Login failed- please check username and password", 'danger')
+    elif request.method == 'POST' and form.errors:
+        for error in form.errors:
+            for str in form.errors[error]:
+                flash(f"{error.capitalize()} error, {str}", 'danger')
+    return render_template("login.html", form=form)
+
 
 @app.route("/recommender")
 def recommender():
@@ -46,10 +76,6 @@ def getRecs():
 
     # Get all the info for the main game on the page
     main_data = db_conn.execute("SELECT * FROM games WHERE GameID=?", (id,)).fetchall()
-
-    # Printing data for debug purposes
-    #print(top_ten_list)
-    #print(main_data)
 
     # return the main game data and top 10 recommended games' data
     # in JSON format
