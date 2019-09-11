@@ -39,15 +39,16 @@ def checkUserDB(bcrypt):
         user_db_conn.execute("CREATE TABLE IF NOT EXISTS Users(UserID INTEGER PRIMARY KEY AUTOINCREMENT, \
         Username VARCHAR(20) UNIQUE, Email VARCHAR(200) UNIQUE, Password VARCHAR(200), AccountType VARCHAR(10) \
         DEFAULT 'Customer')")
-        user_db_conn.execute("CREATE TABLE IF NOT EXISTS RecommenderOpinions (Opinion TINYINT, \
-        UserID INTEGER, GameID INTEGER, FOREIGN KEY(GameID) REFERENCES Users(UserID), PRIMARY KEY(UserID, GameID))")
+        user_db_conn.execute("CREATE TABLE IF NOT EXISTS RecommenderOpinions (UserID INTEGER, \
+        GameID INTEGER, Opinion TINYINT, FOREIGN KEY(UserID) REFERENCES Users(UserID), PRIMARY KEY(UserID, GameID))")
         # Create the special Manager account if doesn't exist
         if not user_db_conn.execute("SELECT * FROM Users WHERE username='manager' and AccountType='Manager'").fetchall():
             manager_pass = "test"
             special_pass = bcrypt.generate_password_hash(manager_pass).decode("UTF-8")
             user_db_conn.execute("INSERT INTO Users (Username, Email, Password, AccountType) \
             VALUES ('manager', 'management@awesomegames.com', ?, 'Manager')", (special_pass,))
-    except sqlite3.OperationalError:
+    except sqlite3.OperationalError as e:
         print("Database error- try restarting the server")
+        print("Error description " + str(e))
     print("Users database is ready")
     return user_db_conn

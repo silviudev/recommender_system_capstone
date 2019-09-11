@@ -1,6 +1,17 @@
 $(function() {
     $(document).ready(getRecs())
 
+    $("#rec-feedback button").click(function(){
+      $.ajax({
+          method: "POST",
+          url: '/api/opinion' + window.location.search + "&opinion=" + this.innerHTML,
+          success: function(){
+            console.log("OPINION POST SUCCESS!")
+            $("#rec-feedback").html("Thanks for your feedback!")
+          }
+      });
+    });
+
     function updatePage(data){
       console.log("AJAX WORKED!");
       console.log(data);

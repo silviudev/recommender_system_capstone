@@ -42,5 +42,13 @@
       <a href="" class="recs_link col-md card text-center border-dark text-dark" id="rec_link10"><figure class="recs" id="rec10"><img src="" alt="" class="card-img-top"><p class="card-title"></p><figcaption></figcaption></figure></a>
      </div>
    </section>
+   {% if current_user.is_authenticated %}
+   <section class="container-fluid text-center" id="rec-feedback">
+     How relevant are these recommendations for you?
+     <button class="btn btn-success" type="button" name="button" id="3stars">Great!</button>
+     <button class="btn btn-warning" type="button" name="button" id="2stars">Okay</button>
+     <button class="btn btn-danger" type="button" name="button" id="1star">Bad</button>
+   </section>
+   {% endif %}
   <script src="{{url_for('static', filename='scripts/gameLookupHandler.js')}}" defer></script>
 {% endblock content%}

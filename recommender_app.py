@@ -138,6 +138,23 @@ def getRecs():
     # in JSON format
     return jsonify(mainData=main_data, recData=top_ten_list)
 
+#API ROUTE FOR POSTING RECOMMENDER OPINION
+@app.route("/api/opinion", methods=['GET', 'POST'])
+def postOpinion():
+    if(current_user.is_authenticated):
+        user_id = int(current_user.id)
+        game_id = int(request.args.get("id"))
+        opinion = request.args.get("opinion")
+        if(opinion == "Great!"):
+            opinion = 3
+        elif opinion == "Okay":
+            opinion = 2
+        else:
+            opinion = 1
+        user_db_conn.execute("REPLACE INTO RecommenderOpinions VALUES (?,?,?)",
+        (user_id, game_id, opinion))
+    return ""
+
 #Function for loading the user to the login managaer
 @login_manager.user_loader
 def load_user(user_id):
