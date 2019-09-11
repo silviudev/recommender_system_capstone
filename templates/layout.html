@@ -24,16 +24,27 @@
         <li class="nav-item active">
           <a class="nav-link" href="{{url_for('home')}}">Home <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('about')}}">About <span class="sr-only">(current)</span></a>
+        </li>
+        {% if current_user.type == 'Manager' %}
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('analytics')}}">Analytics</a>
         </li>
+        {% endif %}
       </ul>
       <form class="form-inline my-2 my-lg-0 mr-auto" id="searchForm" action="{{url_for('search')}}" method="get">
         <input name="data" class="form-control mr-sm-2" type="search" placeholder="Search for games by name" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchButton">Search</button>
       </form>
+      {% if current_user.is_authenticated %}
+      <span>Logged in as {{ current_user.username.capitalize() }}</span>
+      <a class="nav-link" href="{{url_for('account')}}">Account</a>
+      <a class="nav-link" href="{{url_for('logout')}}">Log Out</a>
+      {% else %}
       <a class="nav-link" href="{{url_for('login')}}">Log In</a>
       <a class="nav-link" href="{{url_for('register')}}">Register</a>
+      {% endif %}
     </div>
   </nav>
   <!--**** Main Body Content ****-->

@@ -15,3 +15,11 @@ nav{
 .form-footer{
   margin-bottom: 3%;
 }
+
+.account-info h1{
+    text-decoration: underline;
+}
+
+.account-info{
+  font-size: 2em;
+}
