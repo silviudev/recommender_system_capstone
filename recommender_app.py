@@ -126,7 +126,17 @@ def getRecs():
     id = int(request.args.get("id"))
 
     # Fetch the top ten recommendations' info from the database
-    top_ten_ids = topTenDict[id]
+    top_ten_tuples = topTenDict[id]
+
+    top_ten_ids = []
+    top_ten_sims = []
+
+    for str in top_ten_tuples:
+        tup = eval(str)
+        top_ten_sims.append(tup[0])
+        top_ten_ids.append(tup[1])
+
+
     top_ten_list = db_conn.execute("SELECT GameId, Name, Price, Image, PositiveRatings, \
     NegativeRatings FROM games WHERE GameId=? OR GameId=? OR GameId=? OR GameId=? OR GameId=? \
     OR GameId=? OR GameId=? OR GameId=? OR GameId=? OR GameId=?", tuple(top_ten_ids)).fetchall()
@@ -136,7 +146,7 @@ def getRecs():
 
     # return the main game data and top 10 recommended games' data
     # in JSON format
-    return jsonify(mainData=main_data, recData=top_ten_list)
+    return jsonify(mainData=main_data, recData=top_ten_list, simData=top_ten_sims)
 
 #API ROUTE FOR POSTING RECOMMENDER OPINION
 @app.route("/api/opinion", methods=['GET', 'POST'])

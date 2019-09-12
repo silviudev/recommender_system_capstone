@@ -32,6 +32,7 @@
   border: 2px solid black;
   margin-bottom: 5%;
   margin-top: 5%;
+  padding-right: 2.5%;
 }
 
 #gameName{
@@ -50,4 +51,8 @@
 #rec-feedback{
   margin-top: -2%;
   margin-bottom: 10%;
+}
+
+.simScore{
+  font-size: 0.7em;
 }

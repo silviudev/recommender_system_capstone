@@ -35,6 +35,7 @@ $(function() {
         $(queryString + " img").attr("src", data["recData"][i][3])
         $(queryString + " img").attr("alt", "Image for the recommended game " + data["recData"][i][1])
         $(queryString + " p").text(data["recData"][i][1])
+        $(queryString + " .simScore").text(parseFloat(data["simData"][i]).toFixed(0) + "% Silimarity")
         $("#rec_link" + (i+1)).attr("href", "?id=" + data["recData"][i][0])
       }
     }

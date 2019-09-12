@@ -168,10 +168,7 @@ def getTopTenRecommendations(item_id, matrix):
     topTen = []
     
     for i in range(1,11):
-        topTen.append(newRow[i][1])
-
-    #for i in topTen:
-    #    print("Similarity: " + str(i[0]) + " ID: " + str(int(i[1])))
+        topTen.append(newRow[i])
         
     return topTen
         
@@ -205,7 +202,6 @@ def writeTopTenRecsToCSV(matrix):
 #Imports the top ten recs from the csv file into a dictionary
 def importTopTenFromCSV():
     topTenDict = {}
-    topTenList = []
     itemID = 0
     with open('data/topTenRecs.csv', 'r', newline='', encoding='utf8') as file:
         reader = csv.reader(file)
