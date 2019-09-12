@@ -50,9 +50,13 @@
 
 #rec-feedback{
   margin-top: -2%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .simScore{
   font-size: 0.7em;
+}
+
+#rec-vis{
+  margin-bottom: 7%;
 }

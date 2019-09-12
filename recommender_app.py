@@ -119,6 +119,11 @@ def search():
     Genre FROM games WHERE Name LIKE ? LIMIT 100", ("%" + search_terms + "%",)).fetchall()
     return render_template("search.html", results=search_results, terms=search_terms, num=len(search_results))
 
+#Bubble chart recommender visualization ROUTE
+@app.route("/bubble")
+def bubble():
+    return render_template("bubblechart.html")
+
 #API ROUTE FOR GETTING TOP TEN RECOMMENDATIONS
 @app.route("/api/recs")
 def getRecs():
