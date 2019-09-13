@@ -98,7 +98,9 @@ def analytics():
     if(not current_user.is_authenticated or current_user.type != 'Manager'):
         flash("Access denied-only Manager accounts can access this page", 'danger')
         return redirect(url_for('home'))
-    return render_template("analytics.html")
+    feedback = dict(user_db_conn.execute("SELECT Opinion, count(*) FROM RecommenderOpinions GROUP BY opinion").fetchall())
+    #json_feedback = jsonify(feedback)
+    return render_template("analytics.html", opinions=feedback)
 
 #ACCOUNT PAGE ROUTE
 @app.route("/account")

@@ -1,4 +1,57 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Analytics Page</h1>
+    <h1 class="text-center">Analytics Page</h1>
+    <h2 class="text-center underline">User approval of Recommendation System</h2>
+    <div class="container text-center" id="rec-feedback-pie"></div>
+
+<script type="text/javascript">
+  var op = {{ opinions | tojson }}
+
+  var data = [
+    {"label": "Great", "value": op["3"]},
+    {"label": "Okay", "value": op["2"]},
+    {"label": "Bad", "value": op["1"]},
+   ]
+
+  var width = 960,
+      height = 500,
+      radius = Math.min(width, height) / 2;
+
+  var color = d3.scaleOrdinal()
+      .range(["#55ba43", "#d4d44c", "#d4322c"]);
+
+  var arc = d3.arc()
+      .outerRadius(radius - 10)
+      .innerRadius(0);
+
+  var labelArc = d3.arc()
+      .outerRadius(radius - 40)
+      .innerRadius(radius - 40);
+
+  var pie = d3.pie()
+      .sort(null)
+      .value(function(d) { return d.value; });
+
+  var svg = d3.select("#rec-feedback-pie").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var g = svg.selectAll(".arc")
+        .data(pie(data))
+      .enter().append("g")
+        .attr("class", "arc");
+
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) { return color(d.value); });
+
+    g.append("text")
+        .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+        .attr("dy", ".55em")
+        .text(function(d,i) { return data[i].label; });
+
+</script>
+<!-- <script src="{{url_for('static', filename='scripts/recAnalytics.js')}}"></script> -->
 {% endblock content%}

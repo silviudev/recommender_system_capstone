@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
   <script src="{{url_for('static', filename='scripts/visualizationHandler.js')}}" defer></script>
-  <h1 class="text-center">Popularity of Recommendations based on Number of Ratings</h1>
+  <h1 class="text-center">Popularity based on number of positive ratings</h1>
   <div class="container text-center" id="bubble">
   </div>
 {% endblock content%}
