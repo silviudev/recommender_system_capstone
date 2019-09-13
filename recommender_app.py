@@ -253,7 +253,11 @@ def load_user(user_id):
 if __name__ == '__main__':
     user_db_conn = checkUserDB(bcrypt)
     db_conn = populateDatabase()
+
+    #Logging functionality that logs all server info messages
+    #to a log file
     import logging
     logging.basicConfig(filename='log/error.log',level=logging.INFO,
     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+
     app.run(debug=True)
