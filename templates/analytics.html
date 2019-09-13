@@ -53,5 +53,53 @@
         .text(function(d,i) { return data[i].label; });
 
 </script>
+
+<div class="container text-center scatterplot">
+  <h1>Answering the question: When is the best time of the year to release a game?</h1>
+  <h2>Day of Year Released vs Avg Playtime (in minutes)</h2>
+  {{plot|safe}}
+  <h3>Observations</h3>
+  <p>
+    From this scatter plot, we can see that there are too many games
+    to really determine a best release time. However, we still gain some valuable
+    information. The vast majority of games are played for less than 400 minutes,
+    or about 6.5 hours. So it may be better to make more shorter games than
+    one longer game. Perhaps zooming out a bit and performing a cluster
+    analysis will help clarify things.
+  </p>
+</div>
+
+<div class="container text-center scatterplot">
+  <h2>Kmeans Cluster Analysis of Day of Release vs Avg Playtime (Hours)</h2>
+  {{kmeans|safe}}
+  <h3>Observations</h3>
+  <p>
+    From this cluster analysis, we can see that if we want to release a game that Users
+    will play for a long time, around 200-400 hours, which is represented by the cluster
+    around that range, then we should avoid releasing in the first 30 days of the year or so,
+    as there is a gap there in the 200-400 hour range.
+  </p>
+  <p>
+    There is also a gap between around day 260 and day 300, which corresponds to roughly
+    late August to early October. We should also avoid releasing in that time frame. Based
+    on this analysis the best time to release a game that will be played by users for 200-400 Hours
+    is roughly Day 100 to Day 160, which is spring time. And for a short game of less than 20 Hours
+    of playtime, it doesn't matter much when it's released.
+  </p>
+</div>
+
+<div class="container text-center scatterplot">
+  <h1>Figuring out what a game should be priced</h1>
+  <h2>Price Released vs Positive Ratings</h2>
+  {{priceplot|safe}}
+  <h3>Observations</h3>
+  <p>
+    If we were to release a game, one important question is what the price should be.
+    According to this plot, games around $15 are more likely to have 10,000 or more
+    positive ratings, so that may be a good price point.
+  </p>
+</div>
+
+
 <!-- <script src="{{url_for('static', filename='scripts/recAnalytics.js')}}"></script> -->
 {% endblock content%}

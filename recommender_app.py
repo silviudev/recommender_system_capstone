@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from flask import Flask, render_template, url_for, jsonify, request, flash, redirect
 from content_recommender import importTopTenFromCSV
 from db_utility import populateDatabase, checkUserDB
@@ -6,6 +9,16 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user
 from models.user_model import User
 import sqlite3
+import json
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt, mpld3
+import matplotlib.ticker as plticker
+import statsmodels.api as sm
+import seaborn as sns
+sns.set()
+from sklearn.cluster import KMeans
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '6649d7dbabb36bf6b6e02f23088b6571'
@@ -14,6 +27,16 @@ db_conn = ""
 user_db_conn = ""
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+
+#mpld3 hack to fix numpy array encoding error
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        import numpy as np
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
+from mpld3 import _display
+_display.NumpyEncoder = NumpyEncoder
 
 #HOME ROUTE
 @app.route("/")
@@ -99,8 +122,56 @@ def analytics():
         flash("Access denied-only Manager accounts can access this page", 'danger')
         return redirect(url_for('home'))
     feedback = dict(user_db_conn.execute("SELECT Opinion, count(*) FROM RecommenderOpinions GROUP BY opinion").fetchall())
-    #json_feedback = jsonify(feedback)
-    return render_template("analytics.html", opinions=feedback)
+
+    #Read in data and do basic scatterplot
+    data = pd.read_csv("data/games_clean.csv")
+    data["FormattedReleaseDate"] = data["ReleaseDate"].map(lambda x: pd.to_datetime(x))
+    data["DayOfYear"] = data["FormattedReleaseDate"].dt.dayofyear
+    data["AverageHours"] = data["AveragePlaytime"].map(lambda x : x / 60)
+
+    x1 = data["DayOfYear"]
+    y = data["AveragePlaytime"]
+    fig, ax = plt.subplots()
+    ax.scatter(x1,y)
+    ax.set_ylim(0,600)
+    ax.set_xlabel("Day of Year")
+    ax.set_ylabel("Avg Playtime (min)")
+    html_text = mpld3.fig_to_html(fig)
+
+    #Kmeans clustering
+    x = data.iloc[:, [17,16]]
+    kmeans = KMeans(10)
+    kmeans.fit(x)
+
+    identified_clusters = kmeans.fit_predict(x)
+    identified_clusters
+
+    data_with_clusters = data.copy()
+    data_with_clusters["Cluster"] = identified_clusters
+
+    x2 = data_with_clusters["DayOfYear"]
+    y1 = data_with_clusters["AverageHours"]
+    fig1, ax1 = plt.subplots()
+    ax1.scatter(x2,y1, c=data_with_clusters["Cluster"], cmap="rainbow")
+    ax1.set_xlim(1, 366)
+    ax1.set_ylim(0, 1600)
+    ax1.set_xlabel("DayOfYear")
+    ax1.set_ylabel("AverageHours")
+    html_kmeans = mpld3.fig_to_html(fig1)
+
+    #Price vs positive ratings plot
+    x3 = data["Price"]
+    y2 = data["PositiveRatings"]
+    fig2, ax2 = plt.subplots()
+    ax2.scatter(x3,y2)
+    ax2.set_xlim(1, 60)
+    ax2.set_ylim(0, 50000)
+    ax2.set_xlabel("Price")
+    ax2.set_ylabel("PositiveRatings")
+    html_price = mpld3.fig_to_html(fig2)
+
+    return render_template("analytics.html", opinions=feedback, plot=html_text,
+    kmeans=html_kmeans, priceplot=html_price)
 
 #ACCOUNT PAGE ROUTE
 @app.route("/account")
@@ -182,4 +253,7 @@ def load_user(user_id):
 if __name__ == '__main__':
     user_db_conn = checkUserDB(bcrypt)
     db_conn = populateDatabase()
+    import logging
+    logging.basicConfig(filename='log/error.log',level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
     app.run(debug=True)
