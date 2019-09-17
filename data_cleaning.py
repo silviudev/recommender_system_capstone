@@ -10,20 +10,20 @@ def importAndCleanData():
     mediaDict = {}
 
     # Put the descriptions into a dictionary for merging
-    with open('data/original_data/steam_description_data.csv', newline='', encoding="utf8") as csvfile:
+    with open('data/original_data/game_description_data.csv', newline='', encoding="utf8") as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
             descriptionDict[row["steam_appid"]] = row["short_description"]
 
     # Put the game images into a dictionary for merging
-    with open('data/original_data/steam_media_data.csv', newline='', encoding="utf8") as csvfile:
+    with open('data/original_data/game_media_data.csv', newline='', encoding="utf8") as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
             mediaDict[row["steam_appid"]] = row["header_image"]
             
-    with open('data/original_data/steam.csv', newline='', encoding="utf8") as csvfile:
+    with open('data/original_data/games.csv', newline='', encoding="utf8") as csvfile:
 
         itemCount = 0
         reader = csv.DictReader(csvfile)
@@ -31,7 +31,7 @@ def importAndCleanData():
         for row in reader:
             oDict = OrderedDict()
             
-            # Only keep rows with games that have English language
+            # Only keep rows with games that have English language and time played and some positive ratings
             if row["english"] == "1" and int(row["average_playtime"]) > 0 and int(row["positive_ratings"]) > 0:
                 
                 # Populate the custom ordered dict for the rows and cols being kept
