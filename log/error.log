@@ -56,3 +56,31 @@
 2019-09-17 22:03:45,652 INFO werkzeug Thread-25 : 127.0.0.1 - - [17/Sep/2019 22:03:45] "GET /static/styles/home.css HTTP/1.1" 200 -
 2019-09-17 22:03:45,654 INFO werkzeug Thread-26 : 127.0.0.1 - - [17/Sep/2019 22:03:45] "GET /static/styles/search.css HTTP/1.1" 304 -
 2019-09-17 22:03:45,667 INFO werkzeug Thread-24 : 127.0.0.1 - - [17/Sep/2019 22:03:45] "GET /static/styles/recommender.css HTTP/1.1" 200 -
+2019-09-19 14:29:38,651 INFO werkzeug MainThread :  * Restarting with stat
+2019-09-19 14:29:42,285 WARNING werkzeug MainThread :  * Debugger is active!
+2019-09-19 14:29:42,370 INFO werkzeug MainThread :  * Debugger PIN: 638-648-459
+2019-09-19 14:29:42,385 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-09-19 14:44:03,858 INFO werkzeug Thread-2 : 127.0.0.1 - - [19/Sep/2019 14:44:03] "GET / HTTP/1.1" 200 -
+2019-09-19 14:44:04,027 INFO werkzeug Thread-3 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/styles/layout.css HTTP/1.1" 200 -
+2019-09-19 14:44:04,087 INFO werkzeug Thread-5 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/styles/home.css HTTP/1.1" 200 -
+2019-09-19 14:44:04,127 INFO werkzeug Thread-4 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/styles/recommender.css HTTP/1.1" 200 -
+2019-09-19 14:44:04,136 INFO werkzeug Thread-7 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/styles/search.css HTTP/1.1" 200 -
+2019-09-19 14:44:04,177 INFO werkzeug Thread-6 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/styles/bootstrap.min.css HTTP/1.1" 200 -
+2019-09-19 14:44:04,609 INFO werkzeug Thread-8 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/scripts/d3.min.js HTTP/1.1" 304 -
+2019-09-19 14:44:04,678 INFO werkzeug Thread-9 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/scripts/jquery.js HTTP/1.1" 304 -
+2019-09-19 14:44:04,762 INFO werkzeug Thread-10 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /static/scripts/bootstrap.bundle.min.js HTTP/1.1" 304 -
+2019-09-19 14:44:04,925 INFO werkzeug Thread-11 : 127.0.0.1 - - [19/Sep/2019 14:44:04] "GET /favicon.ico HTTP/1.1" 404 -
+2019-09-19 14:44:07,636 INFO werkzeug Thread-12 : 127.0.0.1 - - [19/Sep/2019 14:44:07] "GET /logout HTTP/1.1" 302 -
+2019-09-19 14:44:07,667 INFO werkzeug Thread-13 : 127.0.0.1 - - [19/Sep/2019 14:44:07] "GET /home HTTP/1.1" 200 -
+2019-09-19 14:44:09,974 INFO werkzeug Thread-14 : 127.0.0.1 - - [19/Sep/2019 14:44:09] "GET /login HTTP/1.1" 200 -
+2019-09-19 14:44:10,090 INFO werkzeug Thread-15 : 127.0.0.1 - - [19/Sep/2019 14:44:10] "GET /static/styles/bootstrap.min.css HTTP/1.1" 200 -
+2019-09-19 14:44:10,121 INFO werkzeug Thread-16 : 127.0.0.1 - - [19/Sep/2019 14:44:10] "GET /static/styles/layout.css HTTP/1.1" 200 -
+2019-09-19 14:44:10,121 INFO werkzeug Thread-17 : 127.0.0.1 - - [19/Sep/2019 14:44:10] "GET /static/styles/recommender.css HTTP/1.1" 200 -
+2019-09-19 14:44:10,145 INFO werkzeug Thread-18 : 127.0.0.1 - - [19/Sep/2019 14:44:10] "GET /static/styles/home.css HTTP/1.1" 200 -
+2019-09-19 14:44:10,145 INFO werkzeug Thread-19 : 127.0.0.1 - - [19/Sep/2019 14:44:10] "GET /static/styles/search.css HTTP/1.1" 200 -
+2019-09-19 14:44:14,080 INFO werkzeug Thread-21 : 127.0.0.1 - - [19/Sep/2019 14:44:14] "POST /login HTTP/1.1" 302 -
+2019-09-19 14:44:14,134 INFO werkzeug Thread-22 : 127.0.0.1 - - [19/Sep/2019 14:44:14] "GET /home HTTP/1.1" 200 -
+2019-09-19 14:44:21,417 INFO werkzeug Thread-23 : 127.0.0.1 - - [19/Sep/2019 14:44:21] "GET /analytics HTTP/1.1" 200 -
+2019-09-19 14:44:21,549 INFO werkzeug Thread-26 : 127.0.0.1 - - [19/Sep/2019 14:44:21] "GET /static/styles/home.css HTTP/1.1" 200 -
+2019-09-19 14:44:21,551 INFO werkzeug Thread-25 : 127.0.0.1 - - [19/Sep/2019 14:44:21] "GET /static/styles/recommender.css HTTP/1.1" 200 -
+2019-09-19 14:44:21,551 INFO werkzeug Thread-27 : 127.0.0.1 - - [19/Sep/2019 14:44:21] "GET /static/styles/search.css HTTP/1.1" 200 -
