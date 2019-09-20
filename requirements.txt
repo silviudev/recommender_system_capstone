@@ -1,0 +1,11 @@
+flask
+flask_bcrypt
+flask_login
+flask_wtf
+pandas
+numpy
+matplotlib
+statsmodels
+seaborn
+sklearn
+mpld3     
